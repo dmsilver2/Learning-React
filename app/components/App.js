@@ -7,8 +7,9 @@ export default class App extends React.Component {
               <h1>React App</h1>
               {this.props.children}
               <ul>
-                <li><IndexLink to="/home">Home</IndexLink></li>
+                <li><IndexLink to="/">Home</IndexLink></li>
                 <li><Link to="/about">About</Link></li>
+                <li><Link to="/todoapp">Todo App</Link></li>
               </ul>
 
             </div>

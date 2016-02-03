@@ -1,28 +1,24 @@
-var path = require('path');
+var WebpackStripLoader = require('strip-loader');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: [
-    './app/main.js'
+    './app/main'
   ],
   output: {
-    path: path.resolve(__dirname, "public/assets"),
-    publicPath: "/assets/",
-    filename: 'bundle.js'
-  },
-  devServer: {
-    contentBase: "./public",
-    inline: true,
-    port: 8080
+    path: path.join(__dirname, 'public/assets'),
+    filename: 'bundle.js',
+    publicPath: '/assets/'
   },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
+        loader: 'babel',
         exclude: /(node_modules|bower_components)/,
-        loader: 'react-hot!babel'
       },
       {
         test: /\.css$/,
@@ -39,9 +35,13 @@ module.exports = {
     ]
   },
   plugins: [
-        new ExtractTextPlugin("styles.css"),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ]
-
+    new ExtractTextPlugin("styles.css"),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    })
+  ]
 }
