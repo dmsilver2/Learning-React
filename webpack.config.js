@@ -22,7 +22,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'react-hot!babel'
+        loader: 'babel'
       },
       {
         test: /\.css$/,
@@ -40,7 +40,6 @@ module.exports = {
   },
   plugins: [
         new ExtractTextPlugin("styles.css"),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ]
 

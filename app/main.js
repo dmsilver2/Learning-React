@@ -1,18 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router'
-import Home from './components/Home';
-import About from './components/About'
-import App from './components/App'
-import TodoRedux from './components/TodoRedux'
+import { createStore } from 'redux'
+import todoAppReducer from './reducers/index'
+import Root from './containers/Root'
 require("./sass/index.scss");
 
+let store = createStore(todoAppReducer);
+
 render(
-  <Router history={browserHistory}>
-    <Route path="/" component={App} >
-      <IndexRoute component={Home} />
-      <Route path="about" component={About} />
-      <Route path="todoapp" component={TodoRedux} />
-    </Route>
-  </Router>
-, document.getElementById("app"));
+  <Root store={store} />,
+  document.getElementById("app")
+);
