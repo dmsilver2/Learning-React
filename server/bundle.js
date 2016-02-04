@@ -27,7 +27,7 @@ module.exports = function () {
   var bundler = new WebpackDevServer(compiler, {
 
     // We need to tell Webpack to serve our bundled application
-    // from the build path. When proxying:
+    // from the asseets path. When proxying:
     // http://localhost:3000/assets -> http://localhost:8080/assets
     publicPath: '/assets/',
     // Configure hot replacement
