@@ -28,6 +28,14 @@ if (!isProduction) {
     });
   });
 
+  app.get('/api/alltodos', function (req,res) {
+    res.status(200)
+       .json([
+              {id: 0, text: "Todo 1", completed: false},
+              {id: 1, text: "Todo 2", completed: true}
+            ]);
+  })
+
 }
 
 // It is important to catch any errors from the proxy or the
