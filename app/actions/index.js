@@ -29,6 +29,18 @@ export const deleteTodo = (id) => {
   }
 }
 
+function status(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return Promise.resolve(response)
+  } else {
+    return Promise.reject(new Error(response.statusText))
+  }
+}
+
+function json(response) {
+  return response.json()
+}
+
 export function loadTodos() {
   // Interpreted by the thunk middleware:
   return function (dispatch, getState) {
@@ -43,13 +55,13 @@ export function loadTodos() {
     })
     // Dispatch vanilla actions asynchronously
     fetch(`/api/alltodos`)
-      .then( (response) =>
-        response.json().then( (data) =>
-          dispatch({
-            type: 'LOAD_TODOS_SUCCESS',
-            response: data
-          })
-        )
+      .then(status)
+      .then(json)
+      .then((data) =>
+        dispatch({
+          type: 'LOAD_TODOS_SUCCESS',
+          response: data
+        })
       )
       .catch((error) => dispatch({
         type: 'LOAD_TODOS_FAILURE',
