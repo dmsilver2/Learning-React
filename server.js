@@ -27,16 +27,21 @@ if (!isProduction) {
         target: 'http://localhost:8080'
     });
   });
-
-  app.get('/api/alltodos', function (req,res) {
-    res.status(200)
-       .json([
-              {id: 0, text: "Todo 1", completed: false},
-              {id: 1, text: "Todo 2", completed: true}
-            ]);
-  })
-
 }
+
+app.get('/api/alltodos', function (req,res) {
+  res.status(200)
+     .json([
+            {id: 0, text: "Todo 1", completed: false},
+            {id: 1, text: "Todo 2", completed: true}
+          ]);
+})
+
+// app.post('/login', function (req,res) {
+//   res.status(200)
+//       .json()
+// })
+
 
 // It is important to catch any errors from the proxy or the
 // server will crash. An example of this is connecting to the
